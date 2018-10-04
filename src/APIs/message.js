@@ -15,11 +15,11 @@ class Message {
     })
       .then((response: AxiosResponse) => {
         const {data} = response;
-        const {recipientId, messageId} = data;
+        const {recipient_id, message_id} = data;
         if (messageId) {
-          console.log('Message to recipient %s with id %s was sent', recipientId, messageId);
+          console.log('Message to recipient %s with id %s was sent', recipient_id, message_id);
         } else {
-          console.log('Message to recipient %s was sent', recipientId);
+          console.log('Message to recipient %s was sent', recipient_id);
         }
       })
       .catch((error: AxiosError) => {
