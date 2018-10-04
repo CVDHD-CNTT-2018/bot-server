@@ -8,7 +8,7 @@ const {PAGE_ACCESS_TOKEN} = process.env;
 
 class Message {
   send: Function = (message: Object): Promise => {
-    return request.post('/me/messages', message, {
+    return request.post('/v3.1/me/messages', message, {
       params: {
         access_token: PAGE_ACCESS_TOKEN
       }
