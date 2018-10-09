@@ -2,12 +2,13 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
+
 import './dotenv';
 import webhook from './webhook/router';
 
 const app = express();
 
-export const port = process.env.PORT || 8443;
+export const port = process.env.PORT || 5000;
 app.set('port', port);
 
 app.use(bodyParser.json());

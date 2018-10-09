@@ -4,4 +4,4 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-console.log('Dotenv');
+export default dotenv;
