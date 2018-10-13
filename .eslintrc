@@ -2,8 +2,10 @@
   "parser": "babel-eslint",
   "rules": {
     "es6": true,
-    "semi": "warn",
-    "comma-dangle": "warn",
+    "semi": [
+      "error",
+      "always"
+    ],
     "indent": [
       "warn",
       2

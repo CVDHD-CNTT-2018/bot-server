@@ -3,6 +3,7 @@
 import type {AxiosError, AxiosResponse} from 'axios';
 import {request} from '../helpers/request';
 import '../dotenv';
+import type {MessageType} from "../types/message";
 
 const {PAGE_ACCESS_TOKEN} = process.env;
 
@@ -10,7 +11,7 @@ class Message {
   send: Function = (message: Object): Promise => {
     return request.post('/v2.6/me/messages', message, {
       params: {
-        access_token: PAGE_ACCESS_TOKEN
+        access_token: PAGE_ACCESS_TOKEN,
       }
     })
       .then((response: AxiosResponse) => {
@@ -29,7 +30,8 @@ class Message {
   };
 
   receive: Function = (event: Object) => {
-    const {sender, message} = event;
+    const {sender} = event;
+    const message: MessageType = event.message;
     const {mid, app_id, metadata} = message;
     if (message.is_echo) {
       console.log("Received echo for message %s and app %d with metadata %s", mid, app_id, metadata);
