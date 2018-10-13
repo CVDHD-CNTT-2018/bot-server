@@ -7,9 +7,6 @@ import './dotenv';
 
 const app = express();
 
-export const port = process.env.PORT || process.env.HTTPS_PORT;
-app.set('port', port);
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
