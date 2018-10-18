@@ -1,7 +1,7 @@
 // @flow
 
 import type {AxiosError, AxiosResponse} from 'axios';
-import {request} from '../helpers/request';
+import {request, callAPI} from '../helpers/request';
 import '../dotenv';
 import type {MessageType} from "../types/message";
 
@@ -11,7 +11,7 @@ class Message {
   send: Function = (message: Object): Promise => {
     return request.post('/v2.6/me/messages', message, {
       params: {
-        access_token: PAGE_ACCESS_TOKEN,
+        access_token: PAGE_ACCESS_TOKEN
       }
     })
       .then((response: AxiosResponse) => {
@@ -37,13 +37,21 @@ class Message {
       console.log("Received echo for message %s and app %d with metadata %s", mid, app_id, metadata);
     }
     if (message.text) {
-      this.send({
-        recipient: sender,
-        message: {
-          text: `Nhận được tin nhắn: ${message.text}`,
-          metadata: "TEXT_MESSAGE"
+      callAPI.get(`/message`, {
+        params: {
+          query: message.text
         }
-      });
+      })
+        .then((response) => {
+          const {data} = response;
+          this.send({
+            text: data.data.value,
+            metadata: 'RESPONSE_TEXT_MESSAGE'
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 }

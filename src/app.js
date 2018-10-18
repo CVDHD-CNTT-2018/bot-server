@@ -7,6 +7,8 @@ import './dotenv';
 
 const app = express();
 
+export const port = process.env.PORT || 8443;
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
