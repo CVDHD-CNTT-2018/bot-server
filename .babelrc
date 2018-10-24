@@ -4,7 +4,6 @@
     "flow"
   ],
   "plugins": [
-    "transform-es2015-arrow-functions",
     "transform-object-rest-spread",
     "transform-class-properties"
   ]
