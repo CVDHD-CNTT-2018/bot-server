@@ -3,6 +3,7 @@
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
+
 import app, {port} from './app';
 import './dotenv';
 
@@ -19,14 +20,13 @@ if (process.env.APP_SERVER === 'heroku') {
     key: fs.readFileSync(`${__dirname}/../.ssl/key`),
     cert: fs.readFileSync(`${__dirname}/../.ssl/cert`)
   };
+  // Start server
   try {
     const httpServer = http.createServer(app);
     const httpsServer = https.createServer(credentials, app);
-
     httpServer.listen(process.env.HTTP_PORT);
-    httpsServer.listen(process.env.HTTPS_PORT);
-    
     console.log('HTTP web server is running on port %d', process.env.HTTP_PORT);
+    httpsServer.listen(process.env.HTTPS_PORT);
     console.log('HTTPS web server is running on port %d', process.env.HTTPS_PORT);
   } catch (error) {
     console.error(error);

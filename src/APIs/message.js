@@ -37,6 +37,7 @@ class Message {
       console.log("Received echo for message %s and app %d with metadata %s", mid, app_id, metadata);
     }
     if (message.text) {
+      console.log('Receive message %s', message.text);
       callAPI.get(`/message`, {
         params: {
           query: message.text
@@ -45,12 +46,15 @@ class Message {
         .then((response) => {
           const {data} = response;
           this.send({
-            text: data.data.value,
-            metadata: 'RESPONSE_TEXT_MESSAGE'
+            recipient: sender,
+            message: {
+              text: data.data.value,
+              metadata: 'RESPONSE_TEXT_MESSAGE'
+            }
           });
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
   };
