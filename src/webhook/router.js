@@ -1,8 +1,10 @@
 // @flow
 
 import {Router} from 'express';
+import moment from 'moment';
 import '../dotenv';
 import messageAPI from '../APIs/message';
+import type {EntryType, EventType} from "../types/webhook";
 
 const webhook = Router({});
 
@@ -26,15 +28,15 @@ webhook.get('/', (req, res) => {
 webhook.post('/', (req, res) => {
   const {body} = req;
   if (body.object === 'page') {
-    body.entry.forEach((pageEntry) => {
-      const {id, time} = pageEntry;
-      pageEntry.messaging.forEach((messageEvent) => {
+    body.entry.map((pageEntry: EntryType) => {
+      pageEntry.messaging.map((messageEvent) => {
         if (messageEvent.message) {
           messageAPI.receive(messageEvent);
         }
       });
     });
   }
+  res.status(200).send('OK');
 });
 
 export default webhook;
