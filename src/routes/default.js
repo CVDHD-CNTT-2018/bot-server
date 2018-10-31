@@ -7,7 +7,8 @@ const router = new Router({});
 
 router.get('/', (req, res) => {
   res.status(200);
-  res.sendFile(path.resolve('public/index.html'));
+  const indexPath: string = path.resolve('public/index.html');
+  res.sendFile(indexPath);
 });
 
 export default router;

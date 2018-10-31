@@ -1,6 +1,7 @@
 // @flow
 
 import axios, {type AxiosInstance} from 'axios';
+
 import '../dotenv';
 
 export const request: AxiosInstance = axios.create({

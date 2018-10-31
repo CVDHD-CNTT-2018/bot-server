@@ -2,7 +2,8 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import webhook from './webhook/router';
+
+import webhook from './routes/webhook';
 import defaultRoute from './routes/default';
 import privacyPolicy from './routes/privacyPolicy';
 import termsOfService from './routes/termsOfService';

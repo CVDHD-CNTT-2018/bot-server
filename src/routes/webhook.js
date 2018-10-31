@@ -1,10 +1,10 @@
 // @flow
 
 import {Router} from 'express';
-import moment from 'moment';
-import '../dotenv';
+
 import messageAPI from '../APIs/message';
-import type {EntryType, EventType} from "../types/webhook";
+import '../dotenv';
+import type {EntryType} from '../types/webhook';
 
 const webhook = Router({});
 
@@ -36,6 +36,7 @@ webhook.post('/', (req, res) => {
       });
     });
   }
+  res.send('');
 });
 
 export default webhook;
