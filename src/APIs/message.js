@@ -9,11 +9,12 @@ const {PAGE_ACCESS_TOKEN} = process.env;
 
 class Message {
   send: Function = (message: Object): Promise => {
-    return request.post('/v2.6/me/messages', message, {
+    const options = {
       params: {
         access_token: PAGE_ACCESS_TOKEN
       }
-    })
+    };
+    return request.post('/v2.6/me/messages', message, options)
       .then((response: AxiosResponse) => {
         const {data} = response;
         const {recipient_id, message_id} = data;
@@ -48,7 +49,7 @@ class Message {
           this.send({
             recipient: sender,
             message: {
-              text: data.data.value,
+              text: data.data.value || 'Câu này mình chưa hiểu lắm!',
               metadata: 'RESPONSE_TEXT_MESSAGE'
             }
           });

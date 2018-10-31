@@ -3,12 +3,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import webhook from './webhook/router';
+import defaultRoute from './routes/default';
+import privacyPolicy from './routes/privacyPolicy';
+import termsOfService from './routes/termsOfService';
 import './dotenv';
 
 const app = express();
-
-export const port = process.env.PORT || 8443;
-app.set('port', port);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -31,8 +31,8 @@ app.use('', express.static(`${__dirname}/../public`));
 app.use('/webhook', webhook);
 
 // Main route
-app.get('/', (req, res) => {
-  res.sendFile(`${__dirname}/../public/index.html`);
-});
+app.use('/', defaultRoute);
+app.use('/privacy-policy', privacyPolicy);
+app.use('/terms-of-service', termsOfService);
 
 export default app;
