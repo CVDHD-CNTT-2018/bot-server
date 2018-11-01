@@ -10,6 +10,6 @@ const callback: Function = (error: Error) => {
   console.log('Web server is up and running!');
 };
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8443;
 
 app.listen(PORT, callback);
