@@ -8,12 +8,10 @@ import app from './app';
 import './dotenv';
 
 const {HTTP_PORT, HTTPS_PORT} = process.env;
-
 const credentials = {
   key: fs.readFileSync('.ssl/key'),
   cert: fs.readFileSync('.ssl/cert')
 };
-
 const httpServer = http.createServer(app);
 const httpsServer = https.createServer(credentials, app);
 
